@@ -1,6 +1,3 @@
 # Socket
 
-Requirements
-
-python\n
-numpy
+Socket Connection for Python
