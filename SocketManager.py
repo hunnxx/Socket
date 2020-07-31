@@ -78,7 +78,8 @@ class Socket_Mananger:
                     break
                  
                 data_decode = data.decode()
-                client_socket.send("Recieve : {0}".format(data_decode).encode())
+                print(data_decode)
+                client_socket.send("{0}".format(data_decode).encode())
 
             # Close
             logger.info('SYSTEM OFF')
@@ -94,18 +95,13 @@ class Socket_Mananger:
             if client_socket == -1:
                 self.error_handling('Cannot connet the server')
 
-            cnt = 0
             while True:
                 # Send msg
-                client_socket.sendall('안녕{0}\n'.format(cnt).encode())
+                client_socket.sendall('Hello\n'.encode())
 
                 # Recv
                 data = client_socket.recv(1024)
                 print('Received', repr(data.decode()))
-
-                if cnt == 10:
-                    break
-                cnt += 1
 
             # Close
             client_socket.close()
