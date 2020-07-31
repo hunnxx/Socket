@@ -7,8 +7,6 @@ import socket
 import Utils
 import sys
 import numpy as np
-import DesignManager
-# from Design import DesignManager as DesignManager
 
 args = Utils.get_parser()
 logger = Utils.get_logger()
@@ -23,10 +21,6 @@ class Socket_Mananger:
         self.host = host
         self.port = port
         self.buff = buff
-
-    def create_serverUI(self, client_socket):
-        self.dManager = DesignManager.MainWindow(client_socket, self.buff)
-        self.app = DesignManager.app
 
     def create_server_socket(self):
         # 소켓 객체를 생성합니다.
@@ -79,36 +73,16 @@ class Socket_Mananger:
             client_socket, client_socket_addr = server_socket.accept()
             self.print_log_msg(client_socket_addr)
 
-            self.create_serverUI(client_socket)
             print(client_socket_addr)
-            # self.dManager.textBrowser.append("{0} -p {1}".format(client_socket_addr[0], str(client_socket_addr[1])))
-            self.app.exec_() # 무한루프
 
-            # while True:
-            #     data = client_socket.recv(self.buff)
-            #     print(data)
-            #     print(len(data))
-            #     data_decode = data.decode()
-            #
-            #     if "IMG" in data_decode:
-            #         self.IMG = True
-            #         buff_tmp = self.buff
-            #         self.buff = int(data_decode.lstrip('IMG:').rstrip('\0'))
-            #         print(self.buff)
-            #
-            #         img = self.recv_img(client_socket)
-            #
-            #         if self.buff == len(img):
-            #             self.error_handling("LOAD IMG")
-            #
-            #         self.buff = buff_tmp
-            #
-            #     else:
-            #         print(data)
-            #         data_decode = data_decode.split('\0')
-            #         data_decode.pop()
-            #         [print(d) for d in data_decode]
-            #         break
+            while True:
+                 data = client_socket.recv(self.buff)
+                 
+                 if not in data:
+                    break
+                 
+                 data_decode = data.decode()
+                 
 
             # 소켓을 닫습니다.
             logger.info('SYSTEM OFF')
