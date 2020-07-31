@@ -1,1 +1,6 @@
 # Socket
+
+Requirements
+
+python
+numpy
